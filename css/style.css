@@ -1,0 +1,21 @@
+
+
+
+p{
+    color: yellow;
+}
+
+
+
+@media screen and (min-width: 576px) {
+    h1 {
+        text-align: center;
+    }
+    #tabla_usuarios {
+        visibility: visible;
+        background-color: yellow;
+    }
+    p{
+        color: yellow;
+    }
+}
