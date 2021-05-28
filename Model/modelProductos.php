@@ -35,6 +35,21 @@ class modelProductos extends Model
         return $query->fetch(PDO::FETCH_OBJ);
     }
 
+    function GetBotinesPorMarca($id_marca)
+    {
+
+        $sentencia = $this->getDB()->prepare("SELECT * FROM botines WHERE marca=?");
+        $sentencia->execute([$id_marca]);
+        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+    }
+    function modificarBotin($id)
+    {
+        $sentencia = $this->getDB()->prepare("UPDATE botines SET stock=true WHERE id=?");
+        $sentencia->execute([$id]);
+        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+        
+    }
+
     // funciones marcas
 
     function GetMarcas()
@@ -60,18 +75,5 @@ class modelProductos extends Model
         return $query->fetch(PDO::FETCH_OBJ);
     }
 
-    function GetBotinesPorMarca($id_marca)
-    {
-
-        $sentencia = $this->getDB()->prepare("SELECT * FROM botines WHERE marca=?");
-        $sentencia->execute([$id_marca]);
-        return $sentencia->fetchAll(PDO::FETCH_OBJ);
-    }
-    function modificarBotin($id)
-    {
-        $sentencia = $this->getDB()->prepare("UPDATE botines SET stock=true WHERE id=?");
-        $sentencia->execute([$id]);
-        return $sentencia->fetchAll(PDO::FETCH_OBJ);
-        
-    }
+    
 }

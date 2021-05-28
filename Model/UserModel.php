@@ -11,9 +11,6 @@ class UserModel extends Model{
     }
 
 
-
-
-
     public function add($user, $pass) {
 
         $passEnc = password_hash($pass, PASSWORD_DEFAULT);
@@ -24,8 +21,5 @@ class UserModel extends Model{
         $query->execute([$user, $passEnc]);
 
     }
-
-
-
 
 }

@@ -1,14 +1,17 @@
 <?php
 
-class Model {
+class Model
+{
 
     private $db;
 
-    function __construct(){
+    function __construct()
+    {
         $this->db = $this->create_connection();
     }
 
-    public function create_connection() {
+    public function create_connection()
+    {
 
         // Modificar esto segun la instalacion:
         $host = 'localhost';
@@ -26,8 +29,8 @@ class Model {
         return $db;
     }
 
-    public function getDb() {
+    public function getDb()
+    {
         return $this->db;
     }
-
 }

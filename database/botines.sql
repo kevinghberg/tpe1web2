@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-05-2021 a las 05:06:09
+-- Tiempo de generación: 28-05-2021 a las 17:58:03
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 8.0.3
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `botines`
 --
-CREATE DATABASE IF NOT EXISTS `botines` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `botines`;
 
 -- --------------------------------------------------------
 
@@ -33,20 +31,21 @@ CREATE TABLE `botines` (
   `id` int(11) NOT NULL,
   `modelo` varchar(32) NOT NULL,
   `marca` int(11) NOT NULL,
-  `talle` int(11) NOT NULL
+  `talle` int(11) NOT NULL,
+  `stock` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `botines`
 --
 
-INSERT INTO `botines` (`id`, `modelo`, `marca`, `talle`) VALUES
-(1, 'Tiempo', 1, 42),
-(2, 'Tiempo', 1, 44),
-(3, 'Predator', 2, 43),
-(24, 'Mercurial', 1, 40),
-(41, 'Borussia', 3, 39),
-(44, 'Buongiorno', 5, 42);
+INSERT INTO `botines` (`id`, `modelo`, `marca`, `talle`, `stock`) VALUES
+(1, 'Tiempo', 1, 42, 0),
+(2, 'Tiempo', 1, 44, 0),
+(3, 'Predator', 2, 43, 0),
+(24, 'Mercurial', 1, 40, 0),
+(41, 'Borussia', 3, 39, 0),
+(48, 'Buongiorno', 5, 44, 0);
 
 -- --------------------------------------------------------
 
@@ -122,13 +121,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT de la tabla `botines`
 --
 ALTER TABLE `botines`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT de la tabla `marcas`
 --
 ALTER TABLE `marcas`
-  MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `user`

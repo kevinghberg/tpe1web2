@@ -121,6 +121,11 @@ class ProductosController
         $this->view->RenderDetalle($botin, $marcas);
     }
 
+
+    /**
+     * filtra una categoria (marca)
+     **/
+
     function filtrar()
     {
         $id_marca = $_POST['marcaInput'];
@@ -131,6 +136,10 @@ class ProductosController
 
         $this->view->RenderVentas($botin, $marcas);
     }
+
+    /**
+     * cambia el valor boolean de un botin (dice si esta vendido)
+     **/
 
     function modificarBotin($id)
     {
