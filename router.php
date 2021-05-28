@@ -59,6 +59,9 @@ switch ($urlParts[0]) {
     case 'borrarMarca':
         $ProductosController->borrarMarca($urlParts[1]);
         break;
+     case 'modificar':
+     $ProductosController->modificarBotin($urlParts[1]);
+        break;
     
     default:
         echo '<h1>Error 404 - Page not found </h1>';

@@ -50,7 +50,6 @@ class modelProductos extends Model
         $sentencia = $this->getDB()->prepare("DELETE FROM marcas WHERE id_marca=?");
         $sentencia->execute([$id]);
         return $sentencia->fetch(PDO::PARAM_BOOL);
-        
     }
 
     function newMarca($marca, $paisdeorigen)
@@ -67,5 +66,12 @@ class modelProductos extends Model
         $sentencia = $this->getDB()->prepare("SELECT * FROM botines WHERE marca=?");
         $sentencia->execute([$id_marca]);
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
+    }
+    function modificarBotin($id)
+    {
+        $sentencia = $this->getDB()->prepare("UPDATE botines SET stock=true WHERE id=?");
+        $sentencia->execute([$id]);
+        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+        
     }
 }

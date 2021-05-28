@@ -84,10 +84,8 @@ class ProductosController
 
         if (!empty($modelo) && !empty($talle) && !empty($marca)) {
             $this->model->newBotin($modelo, $talle, $marca);
-            header("Location: ./ventas");
-        } else {
-            header("Location: ./ventas");
         }
+        header("Location: " . BASE_URL . 'ventas');
     }
 
     /**
@@ -101,15 +99,13 @@ class ProductosController
 
         $marca = $_POST['inputMarca'];
         $paisdeorigen = $_POST['inputPaisDeOrigen'];
-        
-       
+
+
 
         if (!empty($marca) && !empty($paisdeorigen)) {
             $this->model->newMarca($marca, $paisdeorigen);
-            header("Location: ./marcas");
-        } else {
-            header("Location: ./marcas");
         }
+        header("Location: " . BASE_URL . 'marcas');
     }
 
     /**
@@ -125,14 +121,24 @@ class ProductosController
         $this->view->RenderDetalle($botin, $marcas);
     }
 
-    function filtrar(){
-        $id_marca=$_POST['marcaInput'];
+    function filtrar()
+    {
+        $id_marca = $_POST['marcaInput'];
 
 
         $botin = $this->model->GetBotinesPorMarca($id_marca);
         $marcas = $this->model->GetMarcas();
 
         $this->view->RenderVentas($botin, $marcas);
-    
+    }
+
+    function modificarBotin($id)
+    {
+
+        AuthHelper::checkLoggedIn();
+
+        $this->model->modificarBotin($id);
+
+        header("Location: " . BASE_URL . 'ventas');
     }
 }

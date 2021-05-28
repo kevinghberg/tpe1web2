@@ -2,26 +2,26 @@
 
 
 <div class="container">
-{if isset($username) && $username}
-    <div class="row justify-content-center ">
+    {if isset($username) && $username}
+        <div class="row justify-content-center ">
 
-        <form action="agregarBotin" method="POST">
-            <input type="text" name="inputModelo" placeholder="Modelo" class="shadow p-1  mx-1 my-1 bg-white rounded">
-            <input type="text" name="inputTalle" placeholder="Talle" class="shadow p-1 mx-1 my-1 bg-white rounded">
+            <form action="agregarBotin" method="POST">
+                <input type="text" name="inputModelo" placeholder="Modelo" class="shadow p-1  mx-1 my-1 bg-white rounded">
+                <input type="text" name="inputTalle" placeholder="Talle" class="shadow p-1 mx-1 my-1 bg-white rounded">
 
-            <select name="inputMarca">
-                {foreach from=$marcas item=marca}
-                    <option value={$marca->id_marca}>{$marca->nombre}</option>
-                {/foreach}
-            </select>
+                <select name="inputMarca">
+                    {foreach from=$marcas item=marca}
+                        <option value={$marca->id_marca}>{$marca->nombre}</option>
+                    {/foreach}
+                </select>
 
-            <button type="submit"> AGREGAR </button>
+                <button type="submit"> AGREGAR </button>
 
-        </form>
+            </form>
 
 
-    </div>
-{/if}
+        </div>
+    {/if}
     <div class="row justify-content-center">
         <form action="filtrar" method="POST">
 
@@ -51,7 +51,10 @@
             <th scope="col" onclick="">TALLE </th>
             <th scope="col" onclick="">MARCA</th>
             <th scope="col" onclick="">DETALLE</th>
-        {if isset($username) && $username} <th scope="col" onclick="">X</th> {/if}
+            {if isset($username) && $username} <th scope="col" onclick="">X</th>
+                <th scope="col" onclick="">MODIFICAR</th>
+            {/if}
+
         </tr>
 
     </thead>
@@ -67,7 +70,15 @@
                     {/if}
                 {/foreach}
                 <td> <button> <a href="detalles/{$botin->id}"> Detalle </a> </button> </td>
-                {if isset($username) && $username}    <td> <button> <a href="borrarBotin/{$botin->id}"> Borrar </a> </button> </td>{/if}
+                {if isset($username) && $username}
+                    <td> <button> <a href="borrarBotin/{$botin->id}"> Borrar </a> </button> </td>
+
+                    {if $botin->stock==0}
+                        <td> <button> <a href="modificar/{$botin->id}"> Vender</a> </button> </td>
+                    {else}
+                        <td> Vendido </td>
+                    {/if}
+                {/if}
             </tr>
         {/foreach}
 
