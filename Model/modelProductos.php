@@ -7,9 +7,9 @@ class modelProductos extends Model
 
     // funciones botines
 
-    function GetBotines()
+    function getBotines()
     {
-        $sentencia = $this->getDB()->prepare("SELECT * FROM botines"); // selecciona todo de tabla botines
+        $sentencia = $this->getDB()->prepare("SELECT * FROM botines"); 
         $sentencia->execute();
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
@@ -32,7 +32,8 @@ class modelProductos extends Model
     {
         $query = $this->getDb()->prepare('INSERT INTO botines (modelo,marca,talle)VALUES (?,?,?)');
         $query->execute([$modelo, $marca, $talle]);
-        return $query->fetch(PDO::FETCH_OBJ);
+        $idinsertado = $this->getDB()->lastInsertId();
+        return $idinsertado;
     }
 
     function GetBotinesPorMarca($id_marca)

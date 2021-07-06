@@ -13,6 +13,7 @@
                     {foreach from=$marcas item=marca}
                         <option value={$marca->id_marca}>{$marca->nombre}</option>
                     {/foreach}
+                    
                 </select>
 
                 <button type="submit"> AGREGAR </button>
@@ -58,7 +59,7 @@
         </tr>
 
     </thead>
-    <tbody class="table mx-auto  ">
+    <tbody class="table mx-auto">
 
         {foreach from=$botines item=botin}
             <tr>

@@ -46,7 +46,7 @@ switch ($urlParts[0]) {
         break;
     case 'filtrar':
         $ProductosController->filtrar();
-        break;
+        break;      
     case 'agregarBotin':
         $ProductosController->agregarBotin();
         break;

@@ -16,7 +16,7 @@ class ProductosController
         $this->view = new productosView();
     }
 
-    /**
+    /** 
      * Muestra la lista de Marcas.
      **/
 

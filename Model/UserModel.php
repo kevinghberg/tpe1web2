@@ -4,8 +4,8 @@ require_once "ModelDB.php";
 
 class UserModel extends Model{
 
-    public function getUserByUsername($username) {
-        $query = $this->getDb()->prepare('SELECT * FROM `user` WHERE username = ?'); // poner mi base de dtatos con mis usuarios
+    public function     getUserByUsername($username) {
+        $query = $this->getDb()->prepare('SELECT * FROM `user` WHERE username = ?');
         $query->execute(array(($username)));
         return $query->fetch(PDO::FETCH_OBJ);
     }

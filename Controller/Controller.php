@@ -6,7 +6,7 @@ require_once "./Model/modelDB.php";
 
 
 class Controller
-{
+{   
 
     private $view;
 
@@ -17,13 +17,14 @@ class Controller
     
     }
     /**
-     * @param $id
+     *
      * Visualiza index
      */
 
     function Home()
     {
         $this->view->RenderHome();
+        
     }
 
  

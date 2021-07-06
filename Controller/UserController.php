@@ -4,34 +4,39 @@ include_once('view/UserView.php');
 include_once('model/UserModel.php');
 
 
-Class userController{
+class userController
+{
 
     private $model;
     private $view;
 
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->model = new UserModel();
         $this->view = new UserView();
     }
 
-   
 
-    public function showLogin() {
+
+    public function showLogin()
+    {
         $this->view->showLogin();
     }
 
-    
-    
-    public function registrar() {
+
+
+    public function registrar()
+    {
         $user = $_POST['usernameRegister'];
         $pass = $_POST['passwordRegister'];
         $this->model->add($user, $pass);
-        header("Location: " . BASE_URL . 'index');
-    }
+            header("Location: " . BASE_URL . 'index');
+        }
 
-    public function verify() {
-        if(!empty($_POST['usernameLogin']) && !empty($_POST['passwordLogin'])) {
+    public function verify()
+    {
+        if (!empty($_POST['usernameLogin']) && !empty($_POST['passwordLogin'])) {
             $user = $_POST['usernameLogin'];
             $pass = $_POST['passwordLogin'];
             $userDb = $this->model->getUserByUsername($user);
@@ -39,21 +44,16 @@ Class userController{
             if (!empty($userDb) && password_verify($pass, $userDb->password)) {
                 AuthHelper::login($userDb);
                 header('Location: ' . BASE_URL . "index");
-            } else 
+            } else
                 $this->view->showLogin("Login incorrecto, password o usuario incorrecto");
         } else {
             $this->view->showLogin("Login incompleto");
         }
     }
 
-    public function logout() {
+    public function logout()
+    {
         AuthHelper::logout();
         header("Location: " . BASE_URL . 'login');
     }
-
-
-
-
-
-    
 }

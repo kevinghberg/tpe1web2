@@ -1,7 +1,9 @@
 <?php
 
-require_once "./smarty-3.1.39/libs/Smarty.class.php";
+require_once "./libs/Smarty.class.php";
+
 require_once('Helpers/AuthHelper.php');
+
 
 class View
 {
@@ -26,10 +28,9 @@ class View
 
     public function getUsername()
     {
-
         $username = $this->authHelper->getLoggedUserName();
 
-        return $username;
+        return $username;   
     }
 
     function RenderHome()

@@ -11,7 +11,7 @@
                     <li data-aos="flip-up" data-aos-delay="300"> Modelo: {$bot->modelo}</li>
                     <li data-aos="flip-up" data-aos-delay="400"> Talle: {$bot->talle}</li>
                     {foreach from=$marcas item=marca}
-                        {if $bot->id eq $marca->id_marca}
+                        {if $bot->marca eq $marca->id_marca}
                             <li data-aos="flip-up" data-aos-delay="600"> Marca: {$marca->nombre}</li>
                         {/if}
                     {/foreach}

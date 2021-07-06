@@ -4,7 +4,7 @@ require_once('View.php');
 
 class UserView extends View {
 
-    public function __construct() {
+   public function __construct() {
         parent::__construct();
     }
 
