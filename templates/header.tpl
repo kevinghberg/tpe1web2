@@ -36,6 +36,12 @@
                             href="marcas">MARCAS</a>
                     </li>
 
+                    <li class="nav-item">
+                    <a class="nav-link text-warning font-weight-bolder border border-warning rounded border-left-0 border-top-0 mx-1 my-1 shadow-lg p-2 "
+                        href="listaUsuarios">USUARIOS</a>
+                    </li>
+                    
+
                     {if isset($username) && $username}
                         <a class="nav-link text-warning font-weight-bolder border border-warning rounded border-left-0 border-top-0 mx-1 my-1 shadow-lg p-2 justify content right"
                             href="logout">LOGOUT

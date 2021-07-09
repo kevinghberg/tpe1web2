@@ -14,4 +14,22 @@ class UserView extends View {
         $this->getSmarty()->assign('index', BASE_URL.'login');
         $this->getSmarty()->display('templates/login.tpl');
     }
+
+    public function showListaUsuarios($users){
+
+
+        $this->getSmarty()->assign('Usuarios', "Tabla Usuarios");
+        $this->getSmarty()->assign('users', $users); 
+        $this->getSmarty()->display('templates/listaUsuarios.tpl');
+        
+    }
+
+    public function renderListaUsuarios(){
+
+
+
+        header("Location: " . BASE_URL . 'listaUsuarios');
+    }
+
+
 }

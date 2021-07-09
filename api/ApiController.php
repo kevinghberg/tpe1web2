@@ -14,6 +14,7 @@ class ApiController
         $this->model =  new modelProductos();
         $this->view = new APIView();
         $this->data = file_get_contents("php://input");
+        
     }
 
     private function getData()
@@ -96,9 +97,6 @@ class ApiController
     //header("Location: " . BASE_URL . 'marcas');
 
 
-    /** 
-     * Muestra la lista de Marcas.
-     **/
 
     
 }

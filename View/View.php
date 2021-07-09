@@ -43,4 +43,6 @@ class View
     {
         header("Location: " . BASE_URL . "index");
     }
+
+    
 }

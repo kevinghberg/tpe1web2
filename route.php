@@ -46,7 +46,7 @@ switch ($urlParts[0]) {
         break;
     case 'filtrar':
         $ProductosController->filtrar();
-        break;      
+        break;
     case 'agregarBotin':
         $ProductosController->agregarBotin();
         break;
@@ -59,10 +59,21 @@ switch ($urlParts[0]) {
     case 'borrarMarca':
         $ProductosController->borrarMarca($urlParts[1]);
         break;
-     case 'modificar':
-     $ProductosController->modificarBotin($urlParts[1]);
+    case 'modificar':
+        $ProductosController->modificarBotin($urlParts[1]);
         break;
-    
+    case 'listaUsuarios':
+        $UserController->listarUsuarios();
+        break;
+    case 'deleteUser':
+        $UserController->deleteUser($urlParts[1]);
+        break;
+    case 'admin':
+        $UserController->setUserToAdmin($urlParts[1]);
+        break;
+    case 'user':
+        $UserController->setAdminToUser($urlParts[1]);
+        break;
     default:
         echo '<h1>Error 404 - Page not found </h1>';
         break;
