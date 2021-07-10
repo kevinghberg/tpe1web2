@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="C:\xampp\htdocs\WEB2\web2-TPE1\css\style.css">
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 
 <body>
@@ -36,11 +37,18 @@
                             href="marcas">MARCAS</a>
                     </li>
 
+
+
+
+                   
                     <li class="nav-item">
                     <a class="nav-link text-warning font-weight-bolder border border-warning rounded border-left-0 border-top-0 mx-1 my-1 shadow-lg p-2 "
                         href="listaUsuarios">USUARIOS</a>
                     </li>
                     
+
+
+
 
                     {if isset($username) && $username}
                         <a class="nav-link text-warning font-weight-bolder border border-warning rounded border-left-0 border-top-0 mx-1 my-1 shadow-lg p-2 justify content right"

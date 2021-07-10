@@ -1,5 +1,7 @@
 {include file="header.tpl"}
 <h2 >Lista de todos los Usuarios Registrados</h2>
+
+{if $logged eq 'admin'}
    <section >
         <table>
             <thead>
@@ -34,3 +36,4 @@
             </tbody>
         </table>
     </section>
+{/if}

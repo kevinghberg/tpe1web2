@@ -25,9 +25,10 @@ class ProductosView extends View{
         
     }
 
-    function RenderDetalle($botin,$marcas){
+    function RenderDetalle($botin,$marcas,$logged){
         $this->getSmarty()->assign('botin', $botin);
         $this->getSmarty()->assign('marcas', $marcas);
+        $this->getSmarty()->assign('logged', $logged);
         $this->getSmarty()->display("templates/detalles.tpl");
         
     }

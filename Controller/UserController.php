@@ -23,7 +23,8 @@ class userController
 
     public function showLogin()
     {
-        $this->view->showLogin();
+        $logged = $this->CheckLoggedIn();
+        $this->view->showLogin($logged);
     }
 
 
@@ -61,6 +62,7 @@ class userController
 
             if (!empty($userDb) && password_verify($pass, $userDb->password)) {
                 AuthHelper::login($userDb);
+                $_SESSION["admin"] = $userDb->admin;
                 header('Location: ' . BASE_URL . "index");
             } else
                 $this->view->showLogin("Login incorrecto, password o usuario incorrecto");
@@ -82,7 +84,9 @@ class userController
 
         $users = $this->model->getUsers();
 
-        $this->view->showListaUsuarios($users);
+        $logged = $this->CheckLoggedIn();
+
+        $this->view->showListaUsuarios($users,$logged);
     }
 
     function deleteUser($id)
@@ -118,5 +122,18 @@ class userController
         $this->model->updateToUser($id);
 
         $this->view->renderListaUsuarios();
+    }
+
+    
+    private function CheckLoggedIn(){
+        
+        if(!isset($_SESSION["admin"])){
+            $logged = "false";
+        } elseif ($_SESSION["admin"] == 1){
+            $logged = "admin";
+        } else {
+            $logged = "user";
+        }
+        return $logged;
     }
 }

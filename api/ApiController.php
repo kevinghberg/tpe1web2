@@ -17,10 +17,12 @@ class ApiController
         
     }
 
-    private function getData()
-    {
+  
+    function GetData(){
+
         return json_decode($this->data);
-    }
+        
+    }  
 
 
 

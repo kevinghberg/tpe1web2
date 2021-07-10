@@ -117,8 +117,8 @@ class ProductosController
 
         $botin = $this->model->GetBotin($id);
         $marcas = $this->model->GetMarcas();
-
-        $this->view->RenderDetalle($botin, $marcas);
+        $logged = $this->CheckLoggedIn();
+        $this->view->RenderDetalle($botin, $marcas,$logged);
     }
 
 
@@ -149,5 +149,25 @@ class ProductosController
         $this->model->modificarBotin($id);
 
         header("Location: " . BASE_URL . 'ventas');
+    }
+
+
+
+
+
+
+
+
+
+    private function CheckLoggedIn(){
+        
+        if(!isset($_SESSION["admin"])){
+            $logged = "false";
+        } elseif ($_SESSION["admin"] == 1){
+            $logged = "admin";
+        } else {
+            $logged = "user";
+        }
+        return $logged;
     }
 }

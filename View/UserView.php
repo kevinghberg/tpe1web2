@@ -8,25 +8,28 @@ class UserView extends View {
         parent::__construct();
     }
 
-    public function showLogin($error=null) {
+    public function showLogin($logged,$error=null) {
         $this->getSmarty()->assign('title', "Login");
-        $this->getSmarty()->assign('mensaje', $error);        
+        $this->getSmarty()->assign('mensaje', $error);  
+        $this->getSmarty()->assign('logged', $logged);    
         $this->getSmarty()->assign('index', BASE_URL.'login');
         $this->getSmarty()->display('templates/login.tpl');
     }
 
-    public function showListaUsuarios($users){
+    public function showListaUsuarios($users,$logged){
 
+        
 
         $this->getSmarty()->assign('Usuarios', "Tabla Usuarios");
         $this->getSmarty()->assign('users', $users); 
+        $this->getSmarty()->assign('logged', $logged); 
+        
         $this->getSmarty()->display('templates/listaUsuarios.tpl');
+       
         
     }
 
     public function renderListaUsuarios(){
-
-
 
         header("Location: " . BASE_URL . 'listaUsuarios');
     }

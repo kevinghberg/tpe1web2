@@ -1,6 +1,7 @@
 <?php
 require_once 'libs/Router.php';
 require_once 'api/ApiController.php';
+require_once 'api/ApiComentariosController.php';
 
 // crea el router
 $router = new Router();
@@ -13,9 +14,9 @@ $router->addRoute('addbotin', 'POST', 'ApiController', 'addBotin');
 
 
 
-
-
 $router->addRoute('comentarios', 'POST', 'ApiComentariosController', 'InsertComentario');
+$router->addRoute("comentarios/:ID", "GET", "ApiComentariosController", "GetComentarios");
+
 
 
 
