@@ -16,9 +16,9 @@ class modelProductos extends Model
 
     function GetBotin($id)
     {
-        $sentencia = $this->getDB()->prepare("SELECT * FROM botines WHERE id=?");
-        $sentencia->execute(array($id));
-        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+        $sentencia = $this->getDB()->prepare("SELECT id,modelo,marca,talle,stock FROM botines WHERE id=?");
+        $sentencia->execute([$id]);
+        return $sentencia->fetch(PDO::FETCH_OBJ);
     }
 
     function borrarBotin($id)

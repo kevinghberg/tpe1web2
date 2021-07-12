@@ -19,7 +19,7 @@ let app = new Vue({
 
 document.addEventListener('DOMContentLoaded', () => {
     getComentarios();
-    document.querySelector('#form_comentario').addEventListener('submit', e => {
+    document.querySelector('#botonComentario').addEventListener('click', e => {
         // evita el envio del form default
         e.preventDefault();
         addComentario();
@@ -28,7 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function getComentarios() {
-    let id =  document.querySelector('input[name="id_rueda"]').value;
+
+    let id =  document.getElementById("botinardo").value;
     fetch('api/comentarios/'+id)
         .then(response => response.json())
         .then(comentarios => app.comments = comentarios)
@@ -38,9 +39,9 @@ function getComentarios() {
 function addComentario() {
     if (validarComentario() == true){
         const comentario = {
-            texto: document.querySelector('input[name="input_textoComentario"]').value,
+            comentario: document.querySelector('input[name="input_textoComentario"]').value,
             valoracion: checkValoracion(),
-            id_rueda: document.querySelector('input[name="id_rueda"]').value
+            id_botin: document.getElementById("botinardo").value
         }
 
         fetch('api/comentarios', {
@@ -80,4 +81,3 @@ function ResetComentario(){
         document.querySelector(`input[name="radio${i}"]`).checked = false;
     }
 }
-

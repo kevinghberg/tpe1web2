@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LGDK-Home</title>
-    <link rel="stylesheet" href="C:\xampp\htdocs\WEB2\web2-TPE1\css\style.css">
+    
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -72,4 +72,6 @@
             </div>
         </nav>
     </header>
-</body>
+    
+
+

@@ -32,6 +32,7 @@ switch ($urlParts[0]) {
     case 'logout':
         $UserController->logout();
         $Controller->Home();
+        break;
     case 'ventas':
         $ProductosController->showVentas();
         break;
@@ -74,6 +75,7 @@ switch ($urlParts[0]) {
     case 'user':
         $UserController->setAdminToUser($urlParts[1]);
         break;
+        
     default:
         echo '<h1>Error 404 - Page not found </h1>';
         break;

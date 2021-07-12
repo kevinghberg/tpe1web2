@@ -7,14 +7,14 @@ class APIView {
      */
     public function response($data, $status) {
         header("Content-Type: application/json");
-        header("HTTP/1.1 " . $status . " " . $this->_requestStatus($status));
+        header("HTTP/1.1 " . $status . " " . $this->requestStatus($status));
         echo json_encode($data);
     }
 
     /**
      * Asocia un codigo de respuesta a un mensaje HTTP
      */
-    private function _requestStatus($code){
+    private function requestStatus($code){
         $status = array(
           200 => "OK",
           404 => "Not found",

@@ -1,8 +1,8 @@
 <?php
-require_once './Model/modelProductos.php';
-require_once 'api.view.php';
+//require_once './Model/modelProductos.php';
+require_once './api/api.view.php';
 
-class ApiController
+abstract class ApiController
 {
 
     private $model;
@@ -11,7 +11,7 @@ class ApiController
 
     public function __construct()
     {
-        $this->model =  new modelProductos();
+        //$this->model =  new modelProductos();
         $this->view = new APIView();
         $this->data = file_get_contents("php://input");
         
@@ -30,7 +30,7 @@ class ApiController
     // BOTINES
 
 
-    public function getBotines($params = [])
+    /*public function getBotines($params = [])
     {
         // obtengo los botines
         $botines = $this->model->getBotines();
@@ -74,7 +74,7 @@ class ApiController
         } else {
             
         }*/
-        $id = $this->model->newBotin($modelo, $talle, $marca);
+      /*  $id = $this->model->newBotin($modelo, $talle, $marca);
         $this->view->response('El ID del botin es = '. $id, 200);
     }
 
@@ -83,7 +83,7 @@ class ApiController
 
 
     /* Agrega una marca */
-    function agregarMarca()
+    /*function agregarMarca()
     {
         //AuthHelper::checkLoggedIn();
 
@@ -98,7 +98,7 @@ class ApiController
     }
     //header("Location: " . BASE_URL . 'marcas');
 
-
+*/
 
     
 }
