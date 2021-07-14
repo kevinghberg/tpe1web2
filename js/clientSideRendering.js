@@ -74,8 +74,8 @@ function addComentario() {
 
 function checkValoracion(){
     for (let i = 1; i <= 5; i++){
-        if (document.querySelector(`input[name="radio${i}"]`).checked){
-            return (document.querySelector(`input[name="radio${i}"]`).value);
+        if (document.querySelector(`input[id="radio${i}"]`).checked){
+            return (document.querySelector(`input[id="radio${i}"]`).value);
         }
     }  
 }

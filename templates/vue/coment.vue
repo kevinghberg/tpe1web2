@@ -3,7 +3,7 @@
 
     
 
-        <h1> {{title}} </h2>
+        <h1> {{subtitle}} </h2>
 
 
         <ul class="list-none">
@@ -15,10 +15,8 @@
                Comentario :  {{ comment.comentario }}  <br> Valoracion :  {{ comment.valoracion }} <br>
                
                 
-                <span><button v-on:click="deleteComentario(comment.id_comentario)" > Eliminar</button></span>
+                <span><button v-on:click="deleteComentario(comment.id_comentario)"> Eliminar</button></span>
 
-
-                
 
 
                 </span>
