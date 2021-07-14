@@ -3,7 +3,7 @@
 include_once('./Model/modelProductos.php');
 include_once('./View/productosView.php');
 
-class ProductosController
+class ProductosController extends Controller
 {
     private $model;
     private $view;
@@ -23,7 +23,8 @@ class ProductosController
     function showMarcas()
     {
         $marcas = $this->model->GetMarcas();
-        $this->view->RenderMarcas($marcas);
+        $logged = $this->CheckLoggedIn();
+        $this->view->RenderMarcas($marcas,$logged);
     }
 
     /**
@@ -45,8 +46,9 @@ class ProductosController
     {
         $botines = $this->model->GetBotines();
         $marcas = $this->model->GetMarcas();
+        $logged = $this->CheckLoggedIn();
 
-        $this->view->RenderVentas($botines, $marcas);
+        $this->view->RenderVentas($botines, $marcas,$logged);
     }
 
     /**
@@ -133,8 +135,9 @@ class ProductosController
 
         $botin = $this->model->GetBotinesPorMarca($id_marca);
         $marcas = $this->model->GetMarcas();
+        $logged = $this->CheckLoggedIn();
 
-        $this->view->RenderVentas($botin, $marcas);
+        $this->view->RenderVentas($botin, $marcas,$logged);
     }
 
     /**
@@ -151,16 +154,8 @@ class ProductosController
         header("Location: " . BASE_URL . 'ventas');
     }
 
-
-
-
-
-
-
-
-
     private function CheckLoggedIn(){
-        
+       
         if(!isset($_SESSION["admin"])){
             $logged = "false";
         } elseif ($_SESSION["admin"] == 1){
@@ -170,4 +165,5 @@ class ProductosController
         }
         return $logged;
     }
+    
 }

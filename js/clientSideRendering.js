@@ -1,24 +1,34 @@
 "use strict"
 
 let app = new Vue({
-    el: '#vue-comentario',
+    el: '#Vue-comments',
     data: {
-        comments: []  
+        comments: [] ,
+        subtitle: "Comentarios" 
     },
-    methods : {
-        deleteComentario(id){
-            fetch(`api/comentarios/${id}`, {
+    methods: {
+        getComentarios: function() {
+            getComentarios();
+        },
+
+        deleteComentario(id_comentario){
+            fetch(`api/comentarios/${id_comentario}`, {
                 method: "DELETE",
                 headers: { "Content-Type": "application/json" },
             })
+            
             .then(response => getComentarios())
             .catch(error => console.log(error));
-        }
-    }
-});
+        
+    },
+}});
+
+app.getComentarios();
+  
 
 document.addEventListener('DOMContentLoaded', () => {
-    getComentarios();
+    
+    
     document.querySelector('#botonComentario').addEventListener('click', e => {
         // evita el envio del form default
         e.preventDefault();
@@ -28,17 +38,20 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function getComentarios() {
+    let urlParts = window.location.href.split("/");
+    let id = urlParts[urlParts.length - 1];
+    let url = "http://localhost:80/WEB2/web2-TPE1/api/comentarios/" + id;
+    fetch(url)
+      .then((response) => response.json())
+      .then((comentarios) => (app.comments = comentarios))
+      .then((console.log(app.comments)))
+      .catch((error) => console.log(error));
+  }
 
-    let id =  document.getElementById("botinardo").value;
-    fetch('api/comentarios/'+id)
-        .then(response => response.json())
-        .then(comentarios => app.comments = comentarios)
-        .catch(error => console.log(error));
-}   
 
 function addComentario() {
     if (validarComentario() == true){
-        const comentario = {
+        let dataC = {
             comentario: document.querySelector('input[name="input_textoComentario"]').value,
             valoracion: checkValoracion(),
             id_botin: document.getElementById("botinardo").value
@@ -47,16 +60,17 @@ function addComentario() {
         fetch('api/comentarios', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(comentario)
+            body: JSON.stringify(dataC)
         })
-            /*.then(response => response.json())
-            .then(comentario => app.comments.push(comentario))*/
+           /* .then(response => response.json())
+           /* .then(comentario => app.comments.push(comentario))*/
             .then(response => getComentarios())
             .catch(error => console.log(error));
     ResetComentario();
     }
 
 }
+
 
 function checkValoracion(){
     for (let i = 1; i <= 5; i++){
@@ -80,4 +94,6 @@ function ResetComentario(){
     for (let i = 1; i <= 5; i++) {
         document.querySelector(`input[name="radio${i}"]`).checked = false;
     }
+
+
 }

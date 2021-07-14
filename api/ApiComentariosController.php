@@ -1,8 +1,8 @@
 <?php
 
 require_once "./Model/modelComentarios.php";
-require_once "./api/ApiController.php";
-require_once "./api/api.view.php";
+require_once "ApiController.php";
+require_once "api.view.php";
 
 class ApiComentariosController extends ApiController
 {
@@ -14,23 +14,23 @@ class ApiComentariosController extends ApiController
         $this->view = new APIView();
     }
 
-    public function GetComentarios($id)
+    
+
+
+    public function GetComentarios($params = [])
     {
+        $id = $params[':ID'];
 
         $comentarios = $this->model->GetComentariosPorProducto($id);
-        if (!empty($comentarios)) {
-            $this->view->response($comentarios, 200);
-        }
+   
+        $this->view->response($comentarios, 200);
     }
 
     public function InsertComentario()
     {
-
         $body = $this->GetData();
 
         $comentario = $this->model->InsertComentario($body->comentario, $body->valoracion, $body->id_botin);
-
-
 
         if (!empty($comentario)) // verifica si la tarea existe
             $this->view->response($this->model->GetComentario($comentario), 200);
@@ -38,21 +38,17 @@ class ApiComentariosController extends ApiController
             $this->view->response("El comentario no se pudo agregar", 404);
     }
 
-
-
-
-
-    public function addComment()
+    public function deleteComentario($params = [])
     {
-        $body = $this->GetData();
-
-        $comentario = $body->comentario;
-        $valoracion = $body->valoracion;
-        $id_botin = $body->id_botin;
-
-        if (($comentario != "") && ($valoracion != "") && ($id_botin != "")) {
-
-            $comment = $this->model->addComment($comentario, $valoracion, $id_botin);
+        $id_comentario = $params[':ID'];
+        $comment = $this->model->GetComentario($id_comentario);
+        if ($comment) {
+            $this->model->DeleteComentario($id_comentario);
+            $this->view->response($comment, 200);
+        } else {
+            $this->view->response("Error", 500);
         }
-    }
+    }       
+
+    
 }

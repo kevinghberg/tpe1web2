@@ -27,9 +27,6 @@
         </div>
     </div>
 
-    <!--{foreach from=$botin item=bot}
-        <input id="botinardo" type="number" value={$bot->id}>
-    {/foreach}-->
 
 
         <input id="botinardo" value={$botin->id}>
@@ -40,7 +37,7 @@
                 <h3>Insertar comentario:</h3>
             </div>
             <input name="input_textoComentario" type="textarea" name="message" rows="5" cols="20"
-                placeholder="inserte su comentario aqui." value="">
+                placeholder="Comentar..">
             <div class="valoracion">
                 <h3>Insertar valoracion del 1 al 5:</h3>
             </div>
@@ -56,6 +53,8 @@
                 <input id="radio5" type="radio" name="radio5" value="1">
                 <label for="radio5">★</label>
             </div>
+
+            
             <div>
                 <button id="botonComentario"> Enviar </button>
             </div>
@@ -65,7 +64,7 @@
 
         <br><br>
         <div>
-            {include file="vue/comentarios.vue"}
+            {include file="vue/coment.vue"}
         </div>
 
 

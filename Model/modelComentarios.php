@@ -17,23 +17,27 @@ class ComentariosModel extends Model
     }
 
     function GetComentariosPorProducto($id)
+
     {
-        $sentencia = $this->getDb()->prepare("SELECT * FROM comentarios WHERE id_botin=?");
-        $sentencia->execute(array($id));
-        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+
+        $query = $this->getDb()->prepare('SELECT comentario,valoracion,id_comentario from comentarios WHERE id_botin=?');
+        $query->execute([$id]);
+        return $query->fetchAll(PDO::FETCH_OBJ);
+       
     }
+    public function GetComentario($id_comentario)
+  {
+    $sentencia = $this->db->prepare( "select * from comentarios where id_comentario=?");
+    $sentencia->execute(array($id_comentario));
+    $comment = $sentencia->fetch(PDO::FETCH_OBJ);
+    return $comment;
+  }
 
-
-    /*function GetComentario($id_comentario){
-        $sentencia = $this->db->prepare("SELECT * FROM comentarios WHERE id_comentario=?");
+    function DeleteComentario($id_comentario){
+        $sentencia = $this->db->prepare("DELETE FROM comentario WHERE id_comentario=30");
         $sentencia->execute(array($id_comentario));
-        return $sentencia->fetch(PDO::FETCH_OBJ);
-    }*/
-
-
-    public function addComment($comentario, $valoracion, $id_botin)
-    {
-        $sentencia = $this->getDb()->prepare("INSERT INTO comentarios (comentario, valoracion, id_botin) VALUES (?,?,?)");
-        $sentencia->execute(array($comentario, $valoracion, $id_botin));
+        return $sentencia->rowCount();
     }
+
+
 }

@@ -5,7 +5,6 @@ require_once 'api/ApiComentariosController.php';
 
 // crea el router
 $router = new Router();
-;
 
 // define la tabla de ruteo
 /*$router->addRoute('getbotines', 'GET', 'ApiController', 'getBotines');
@@ -15,17 +14,22 @@ $router->addRoute('addbotin', 'POST', 'ApiController', 'addBotin');
 
 
 
+
+
+// Comentarios 
+
 $router->addRoute('comentarios', 'POST', 'ApiComentariosController', 'InsertComentario');
 $router->addRoute("comentarios/:ID", "GET", "ApiComentariosController", "GetComentarios");
-$router->addRoute("comentarios/:ID", "DELETE", "ApiComentariosController", "DeleteComentario");
+$router->addRoute("comentarios/:ID", "DELETE", "ApiComentariosController", "deleteComentario");
 
 
 
+//Admin/User
 
 
-//$router->addRoute("admin/:ID", "POST", "UserController", "SetUserToAdmin");
-//$router->addRoute("registrado/:ID", "POST", "UserController", "SetAdminToUser");
-//$router->addRoute("deleteUser/:ID", "POST", "UserController", "deleteUser");
+$router->addRoute("admin/:ID", "POST", "UserController", "SetUserToAdmin");
+$router->addRoute("registrado/:ID", "POST", "UserController", "SetAdminToUser");
+$router->addRoute("deleteUser/:ID", "POST", "UserController", "deleteUser");
 
 
 
@@ -33,4 +37,3 @@ $router->addRoute("comentarios/:ID", "DELETE", "ApiComentariosController", "Dele
 
 
 $router->route($_REQUEST['resource'], $_SERVER['REQUEST_METHOD']);
-$router->route($_GET['resource'], $_SERVER['REQUEST_METHOD']);

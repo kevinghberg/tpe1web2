@@ -5,7 +5,7 @@
 
 
 
-    {if isset($username)&&$username}
+{if $logged eq 'admin'}
         <div class="row justify-content-center ">
 
             <form action="agregarMarca" method="POST">
@@ -37,24 +37,26 @@
 
             <th scope="col" >NOMBRE</th>
             <th scope="col" >PAIS DE ORIGEN</th>
-            {if isset($username) && $username} <th scope="col">X</th> {/if}
+        {if $logged eq 'admin'} <th scope="col">X</th> {/if}
         </tr>
 
     </thead>
 
     <tbody class="table mx-auto">
 
+        
         {foreach from=$marcas item=marca}
             <tr>
                 <td>{$marca->nombre}</td>
                 <td>{$marca->paisOrigen}</td>
-                {if isset($username) && $username}  <td> <button> <a href="borrarMarca/{$marca->id_marca}"> Borrar </a> </button> </td>{/if}
+            {if $logged eq 'admin'}   <td> <button> <a href="borrarMarca/{$marca->id_marca}"> Borrar </a> </button> </td>{/if}
             </tr>
         {/foreach}
+    
     </tbody>
 
 
-    <script src="js/js.js"></script>
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>

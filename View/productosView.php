@@ -7,8 +7,9 @@ class ProductosView extends View{
 
 
 
-    function RenderMarcas($marcas){
+    function RenderMarcas($marcas,$logged){
         $this->getSmarty()->assign('marcas', $marcas);
+        $this->getSmarty()->assign('logged', $logged);
         $this->getSmarty()->display("templates/marcas.tpl");
         
     }
@@ -18,9 +19,10 @@ class ProductosView extends View{
         $this->getSmarty()->display("templates/ventas.tpl");
     }
 
-    function RenderVentas($botines,$marcas){
+    function RenderVentas($botines,$marcas,$logged){
         $this->getSmarty()->assign('botines', $botines);
         $this->getSmarty()->assign('marcas', $marcas);
+        $this->getSmarty()->assign('logged', $logged);
         $this->getSmarty()->display("templates/ventas.tpl");
         
     }

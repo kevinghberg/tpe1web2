@@ -2,7 +2,7 @@
 
 
 <div class="container">
-    {if isset($username) && $username}
+    {if $logged eq 'admin'}
         <div class="row justify-content-center ">
 
             <form action="agregarBotin" method="POST">
@@ -13,7 +13,7 @@
                     {foreach from=$marcas item=marca}
                         <option value={$marca->id_marca}>{$marca->nombre}</option>
                     {/foreach}
-                    
+
                 </select>
 
                 <button type="submit"> AGREGAR </button>
@@ -52,7 +52,7 @@
             <th scope="col" onclick="">TALLE </th>
             <th scope="col" onclick="">MARCA</th>
             <th scope="col" onclick="">DETALLE</th>
-            {if isset($username) && $username} <th scope="col" onclick="">X</th>
+            {if $logged eq 'admin'} <th scope="col" onclick="">X</th>
                 <th scope="col" onclick="">MODIFICAR</th>
             {/if}
 
@@ -71,7 +71,7 @@
                     {/if}
                 {/foreach}
                 <td> <button> <a href="detalles/{$botin->id}"> Detalle </a> </button> </td>
-                {if isset($username) && $username}
+                {if $logged eq 'admin'}
                     <td> <button> <a href="borrarBotin/{$botin->id}"> Borrar </a> </button> </td>
 
                     {if $botin->stock==0}
@@ -89,7 +89,7 @@
 
 </table>
 
-<script src="js/js.js"></script>
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
 </script>
