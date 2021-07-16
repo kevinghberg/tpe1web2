@@ -14,7 +14,12 @@
 
                Comentario :  {{ comment.comentario }}  <br> Valoracion :  {{ comment.valoracion }} <br>
                
-                  
+                
+                <span> <button v-on:click="deleteComentario(comment.id_comentario)"> Eliminar</button></span>
+
+        
+
+                
             </li>
         </ul>
 
