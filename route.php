@@ -64,7 +64,7 @@ switch ($urlParts[0]) {
         $ProductosController->RenderModificar($urlParts[1]);
         break;
     case 'modificarBotin':
-        $ProductosController->modificarBotin($urlParts[1]);
+        $ProductosController->modificarBotin();
         break;
     case 'listaUsuarios':
         $UserController->listarUsuarios();

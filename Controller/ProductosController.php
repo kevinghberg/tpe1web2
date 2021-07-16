@@ -65,24 +65,24 @@ class ProductosController extends Controller
         $talle = $_POST['inputTalle'];
         $marca = $_POST['inputMarca'];
 
-        if(isset($_FILES['imagen']) ){
+        if ((isset($_FILES['imagen']) && ($_FILES['imagen']['size'] > 1))) {
 
-            $nombreArchivo= $_FILES['imagen']['name'];
 
-            $temporario=$_FILES['imagen']['tmp_name'];
-            
-            
-            $extensionArchivo = pathinfo($nombreArchivo, PATHINFO_EXTENSION);   
+            $nombreArchivo = $_FILES['imagen']['name'];
 
-            $this->modelProductos->newBotinConImagen($modelo,$talle,$marca,$nombreArchivo,$extensionArchivo,$temporario);
+            $temporario = $_FILES['imagen']['tmp_name'];
 
-        }
-     
-        $this->modelProductos->newBotin($modelo, $marca, $talle);
+
+            $extensionArchivo = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
+
+            $this->modelProductos->newBotinConImagen($modelo, $talle, $marca, $nombreArchivo, $extensionArchivo, $temporario);
+        } else
+
+            $this->modelProductos->newBotin($modelo, $marca, $talle);
 
         header("Location: " . BASE_URL . 'ventas');
     }
-    
+
 
     /**
      * Selecciona detalles de un botin($id)
@@ -124,18 +124,15 @@ class ProductosController extends Controller
         AuthHelper::checkLoggedIn();
 
 
-        $botin=$this->modelProductos->GetBotin($id);
+        $botin = $this->modelProductos->GetBotin($id);
 
-        $marca=$this->modelMarcas->GetMarcas();
+        $marca = $this->modelMarcas->GetMarcas();
 
-        $this->view->RenderModificar($botin,$marca);
-
-
-       
-
+        $this->view->RenderModificar($botin, $marca);
     }
 
-    function modificarBotin(){
+    function modificarBotin()
+    {
 
         AuthHelper::checkLoggedIn();
 
@@ -144,10 +141,30 @@ class ProductosController extends Controller
         $marca = $_POST['inputModificarMarca'];
         $id = $_POST['inputId'];
 
-        if(!empty($modelo) && !empty($talle) && !empty($marca)){
-          
-            $this->modelProductos->modificarBotin($id,$modelo,$talle,$marca);
 
+        if (!empty($modelo) && !empty($talle) && !empty($marca)) {
+
+            if ((isset($_FILES['imagen']) && ($_FILES['imagen']['size'] > 1))) {
+
+                $nameImage = $_FILES['imagen']['name'];//nombre 
+
+                $tempImagePath = $_FILES['imagen']['tmp_name'];// path temporario
+
+
+                $ext = pathinfo($nameImage, PATHINFO_EXTENSION);//obtengo la extension
+
+                $hashed = 'imagenes/' . uniqid() . '.'.$ext; //la convierto a un hash uniqco
+                $path = 'imagenes/';
+
+                $destino = $path . $hashed;
+
+                move_uploaded_file($tempImagePath, $destino);
+
+            } else
+
+                $destino = '';
+
+            $this->modelProductos->modificarBotin($id, $modelo, $talle, $marca,$destino);
         }
 
         header("Location: " . BASE_URL . 'ventas');

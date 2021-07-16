@@ -7,9 +7,10 @@
 
 <div class="container">
 
-<form method="POST" action="modificarBotin/">
+<form method="POST" action="modificarBotin" enctype="multipart/form-data">
 
 
+<input type="file" name="imagen" id="imagen">
 <input type="text" name="inputModificarModelo" placeholder="Modelo" class="shadow p-1  mx-1 my-1 bg-white rounded">
 <input type="text" name="inputModificarTalle" placeholder="Talle" class="shadow p-1 mx-1 my-1 bg-white rounded">  
 

@@ -44,7 +44,6 @@ function getComentarios() {
     fetch(url)
       .then((response) => response.json())
       .then((comentarios) => (app.comments = comentarios))
-      .then((console.log(app.comments)))
       .catch((error) => console.log(error));
   }
 
@@ -62,8 +61,6 @@ function addComentario() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(dataC)
         })
-           /* .then(response => response.json())
-           /* .then(comentario => app.comments.push(comentario))*/
             .then(response => getComentarios())
             .catch(error => console.log(error));
     ResetComentario();

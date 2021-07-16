@@ -37,10 +37,10 @@ class modelProductos extends Model
         $sentencia->execute([$id_marca]);
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
-    function modificarBotin($id,$modelo,$talle,$marca)
+    function modificarBotin($id,$modelo,$talle,$marca,$destino)
     {
-        $sentencia = $this->getDB()->prepare("UPDATE botines SET modelo=?,talle=?,marca=? WHERE id=?");
-        $sentencia->execute([$modelo,$talle,$marca,$id]);
+        $sentencia = $this->getDB()->prepare("UPDATE botines SET modelo=?,talle=?,marca=?,imagen=? WHERE id=?");
+        $sentencia->execute([$modelo,$talle,$marca,$destino,$id]);
         return $sentencia->fetch(PDO::FETCH_OBJ);
         
     }
@@ -69,16 +69,11 @@ class modelProductos extends Model
         return $query->fetch(PDO::FETCH_OBJ);
 
     }
-    function newBotin($modelo, $marca, $talle ,$imagen=NULL)
+    function newBotin($modelo, $marca, $talle)
     {
 
-        $filepath = null;
-
-        if ($imagen)
-            $filepath= $this->uploadImagen($imagen);
-
-        $query = $this->getDb()->prepare('INSERT INTO botines (modelo,marca,talle,imagen)VALUES (?,?,?,?)');
-        $query->execute([$modelo, $marca, $talle,$filepath]);
+        $query = $this->getDb()->prepare('INSERT INTO botines (modelo,marca,talle)VALUES (?,?,?)');
+        $query->execute([$modelo, $marca, $talle]);
         return $query->fetch(PDO::FETCH_OBJ);
        
     }

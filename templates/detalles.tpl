@@ -3,11 +3,14 @@
 
 <div class="container d-flex justify-content-between">
 
+
+
     <div class="card card border-dark mb-3 " style="width: 16rem;">
 
 
-
+    {if ($botin->imagen  )}   
         <img src="{$botin->imagen}" class="card-img-top" alt="...">
+    {/if}
 
         <div class="card-body ">
             <p class="card-text">
@@ -87,7 +90,7 @@
 
 
     <div>
-        {include file="vue/coment.vue"}
+        {include file="vue/comment.vue"}
     </div>
 
 

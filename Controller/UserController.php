@@ -55,6 +55,8 @@ class userController
 
     public function verify()
     {
+
+        
         if (!empty($_POST['usernameLogin']) && !empty($_POST['passwordLogin'])) {
             $user = $_POST['usernameLogin'];
             $pass = $_POST['passwordLogin'];

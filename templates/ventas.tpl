@@ -74,7 +74,9 @@
         {foreach from=$botines item=botin}
             <tr>
                 <td data-aos="zoom-in-up">
+                {if $botin->imagen}
                 <img src="{$botin->imagen}" width="40" height="30"> </td>
+                {/if}
                 <td data-aos="zoom-in-up">{$botin->modelo}</td>
                 <td data-aos="zoom-in-up">{$botin->talle}</td>
                 {foreach from=$marcas item=marca}
