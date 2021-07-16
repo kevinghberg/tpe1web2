@@ -45,17 +45,11 @@ class modelProductos extends Model
         
     }
 
-    function uploadImagen($imagen) {
 
-        $filepath = 'imagenes/' . uniqid() . '.jpg';
-        
-        return $filepath;
-
-    }
 
     function newBotinConImagen($modelo,$talle,$marca,$nombreArchivo,$extensionArchivo,$temporario){
 
-        $nuevoNombre=md5(time().$nombreArchivo).'.'.$extensionArchivo;
+        $nuevoNombre=$nombreArchivo.uniqid().'.'.$extensionArchivo;
 
         $filepath = 'imagenes/';
 

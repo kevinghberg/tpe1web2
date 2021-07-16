@@ -15,7 +15,7 @@
 <input type="text" name="inputModificarTalle" placeholder="Talle" class="shadow p-1 mx-1 my-1 bg-white rounded">  
 
 
-<input type="hidden" name="inputId" id="botinardo" value={$botin->id}>
+<input type="hidden" name="inputId" value={$botin->id}>
 
 
 <select name="inputModificarMarca">

@@ -3,32 +3,33 @@
 let app = new Vue({
     el: '#Vue-comments',
     data: {
-        comments: [] ,
-        subtitle: "Comentarios" 
+        comments: [],
+        subtitle: "Comentarios"
     },
     methods: {
-        getComentarios: function() {
+        getComentarios: function () {
             getComentarios();
         },
 
-        deleteComentario(id_comentario){
+        deleteComentario(id_comentario) {
             fetch(`api/comentarios/${id_comentario}`, {
                 method: "DELETE",
                 headers: { "Content-Type": "application/json" },
             })
-            
-            .then(response => getComentarios())
-            .catch(error => console.log(error));
-        
-    },
-}});
+
+                .then(response => getComentarios())
+                .catch(error => console.log(error));
+
+        },
+    }
+});
 
 app.getComentarios();
-  
+
 
 document.addEventListener('DOMContentLoaded', () => {
-    
-    
+
+
     document.querySelector('#botonComentario').addEventListener('click', e => {
         // evita el envio del form default
         e.preventDefault();
@@ -42,14 +43,14 @@ function getComentarios() {
     let id = urlParts[urlParts.length - 1];
     let url = "http://localhost:80/WEB2/web2-TPE1/api/comentarios/" + id;
     fetch(url)
-      .then((response) => response.json())
-      .then((comentarios) => (app.comments = comentarios))
-      .catch((error) => console.log(error));
-  }
+        .then((response) => response.json())
+        .then((comentarios) => (app.comments = comentarios))
+        .catch((error) => console.log(error));
+}
 
 
 function addComentario() {
-    if (validarComentario() == true){
+    if (validarComentario() == true) {
         let dataC = {
             comentario: document.querySelector('input[name="input_textoComentario"]').value,
             valoracion: checkValoracion(),
@@ -63,34 +64,36 @@ function addComentario() {
         })
             .then(response => getComentarios())
             .catch(error => console.log(error));
-    ResetComentario();
+        ResetComentario();
     }
 
 }
 
 
-function checkValoracion(){
-    for (let i = 1; i <= 5; i++){
-        if (document.querySelector(`input[id="radio${i}"]`).checked){
+function checkValoracion() {
+    for (let i = 1; i <= 5; i++) {
+        if (document.querySelector(`input[id="radio${i}"]`).checked) {
             return (document.querySelector(`input[id="radio${i}"]`).value);
         }
-    }  
+    }
 }
 
-function validarComentario(){
-    if (document.querySelector('input[name="input_textoComentario"]').value != ""){
-        if (checkValoracion() > 0){
+function validarComentario() {
+    if (document.querySelector('input[name="input_textoComentario"]').value != "") {
+        if (checkValoracion() > 0) {
             return true;
-        }else return false;
-    }else return false;
+        } else return false;
+    } else return false;
 }
 
-function ResetComentario(){
+function ResetComentario() {
 
     document.querySelector('input[name="input_textoComentario"]').value = "";
     for (let i = 1; i <= 5; i++) {
-        document.querySelector(`input[name="radio${i}"]`).checked = false;
+        if (document.querySelector(`input[id="radio${i}"]`).checked) {
+            (document.querySelector(`input[id="radio${i}"]`).checked = false);
+        }
+
+
     }
-
-
 }

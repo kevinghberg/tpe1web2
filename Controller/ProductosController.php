@@ -153,7 +153,7 @@ class ProductosController extends Controller
 
                 $ext = pathinfo($nameImage, PATHINFO_EXTENSION);//obtengo la extension
 
-                $hashed = 'imagenes/' . uniqid() . '.'.$ext; //la convierto a un hash uniqco
+                $hashed =  uniqid() .'.'. $ext; //la convierto a un hash uniqco
                 $path = 'imagenes/';
 
                 $destino = $path . $hashed;
