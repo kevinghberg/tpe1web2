@@ -5,7 +5,7 @@ define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'
 require_once('controller/Controller.php');
 require_once('controller/UserController.php');
 require_once('controller/ProductosController.php');
-
+require_once('controller/MarcasController.php');
 if ($_GET['action'] == '')
     $_GET['action'] = 'index';
 
@@ -14,7 +14,7 @@ $urlParts = explode('/', $_GET['action']);
 $Controller = new Controller();
 $UserController = new UserController();
 $ProductosController = new ProductosController();
-
+$MarcasController = new MarcasController();
 
 switch ($urlParts[0]) {
     case 'index':
@@ -40,7 +40,7 @@ switch ($urlParts[0]) {
         $ProductosController->GetDetalles($urlParts[1]);
         break;
     case 'marcas':
-        $ProductosController->showMarcas();
+        $MarcasController->showMarcas();
         break;
     case 'usuarios':
         $UserController->showLogin();
@@ -52,15 +52,18 @@ switch ($urlParts[0]) {
         $ProductosController->agregarBotin();
         break;
     case 'agregarMarca':
-        $ProductosController->agregarMarca();
+        $MarcasController->agregarMarca();
         break;
     case 'borrarBotin':
         $ProductosController->borrarBotin($urlParts[1]);
         break;
     case 'borrarMarca':
-        $ProductosController->borrarMarca($urlParts[1]);
+        $MarcasController->borrarMarca($urlParts[1]);
         break;
     case 'modificar':
+        $ProductosController->RenderModificar($urlParts[1]);
+        break;
+    case 'modificarBotin':
         $ProductosController->modificarBotin($urlParts[1]);
         break;
     case 'listaUsuarios':
@@ -75,7 +78,6 @@ switch ($urlParts[0]) {
     case 'user':
         $UserController->setAdminToUser($urlParts[1]);
         break;
-        
     default:
         echo '<h1>Error 404 - Page not found </h1>';
         break;

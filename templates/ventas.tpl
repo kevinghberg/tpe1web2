@@ -5,7 +5,16 @@
     {if $logged eq 'admin'}
         <div class="row justify-content-center ">
 
-            <form action="agregarBotin" method="POST">
+        
+        
+            <form action="agregarBotin" method="POST" enctype="multipart/form-data">
+
+                <label>Imagen</label>
+
+
+                 <input type="file" name="imagen" id="imagen">
+
+
                 <input type="text" name="inputModelo" placeholder="Modelo" class="shadow p-1  mx-1 my-1 bg-white rounded">
                 <input type="text" name="inputTalle" placeholder="Talle" class="shadow p-1 mx-1 my-1 bg-white rounded">
 
@@ -48,6 +57,7 @@
      data-aos-easing=" ease-out-cubic" data-aos-duration="2000">
     <thead class="bg-warning">
         <tr id=>
+        <th scope="col">IMAGEN</th>
             <th scope="col">MODELO</th>
             <th scope="col" onclick="">TALLE </th>
             <th scope="col" onclick="">MARCA</th>
@@ -63,6 +73,8 @@
 
         {foreach from=$botines item=botin}
             <tr>
+                <td data-aos="zoom-in-up">
+                <img src="{$botin->imagen}" width="40" height="30"> </td>
                 <td data-aos="zoom-in-up">{$botin->modelo}</td>
                 <td data-aos="zoom-in-up">{$botin->talle}</td>
                 {foreach from=$marcas item=marca}
@@ -71,15 +83,14 @@
                     {/if}
                 {/foreach}
                 <td> <button> <a href="detalles/{$botin->id}"> Detalle </a> </button> </td>
+
                 {if $logged eq 'admin'}
                     <td> <button> <a href="borrarBotin/{$botin->id}"> Borrar </a> </button> </td>
 
-                    {if $botin->stock==0}
-                        <td> <button> <a href="modificar/{$botin->id}"> Vender</a> </button> </td>
-                    {else}
-                        <td> Vendido </td>
+                   
+                        <td> <button> <a href="modificar/{$botin->id}"> Modificar </a> </button> </td>
                     {/if}
-                {/if}
+            
             </tr>
         {/foreach}
 

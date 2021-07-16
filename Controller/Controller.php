@@ -27,6 +27,17 @@ class Controller
         
     }
 
+    private function CheckLoggedIn(){
+       
+        if(!isset($_SESSION["admin"])){
+            $logged = "false";
+        } elseif ($_SESSION["admin"] == 1){
+            $logged = "admin";
+        } else {
+            $logged = "user";
+        }
+        return $logged;
+    }
 
 
  

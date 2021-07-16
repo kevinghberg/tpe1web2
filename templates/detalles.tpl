@@ -1,14 +1,18 @@
 {include file="header.tpl"}
 
-<div class="mt-4 d-flex justify-content-center ">
-    <div class="card card border-dark mb-3" style="width: 16rem;">
 
-        <img src="imagenes/tiempo.jpg" class="card-img-top" alt="...">
+    <div class="container d-flex justify-content-between">
 
+    <div class="card card border-dark mb-3 " style="width: 16rem;">
+
+
+   
+        <img src="{$botin->imagen}" class="card-img-top" alt="...">
+   
         <div class="card-body ">
             <p class="card-text">
 
-
+        
             <ul>
 
 
@@ -29,14 +33,17 @@
 
 
 
-    <input id="botinardo" value={$botin->id}>
+
+
+
+    <input type="hidden" id="idbotin" value={$botin->id}>
 
 
     <form id="form_comentario" action="insert" method="POST">
         <div class="valoracion">
             <h3>Insertar comentario:</h3>
         </div>
-        <input name="input_textoComentario" type="textarea" name="message" rows="5" cols="20" placeholder="Comentar..">
+        <input name="input_textoComentario" type="textarea" name="message" rows="10" cols="20">
         <div>
             <h3>Insertar valoracion del 1 al 5:</h3>
         </div>
@@ -68,11 +75,16 @@
 
 
     <br><br>
+    
+
     <div>
-        {include file="vue/coment.vue"}
-    </div>
+    {include file="vue/coment.vue"}
+</div>
 
 
+
+
+</div>
 </div>
 
 

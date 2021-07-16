@@ -16,7 +16,7 @@ class modelProductos extends Model
 
     function GetBotin($id)
     {
-        $sentencia = $this->getDB()->prepare("SELECT id,modelo,marca,talle,stock FROM botines WHERE id=?");
+        $sentencia = $this->getDB()->prepare("SELECT id,modelo,marca,talle,stock,imagen FROM botines WHERE id=?");
         $sentencia->execute([$id]);
         return $sentencia->fetch(PDO::FETCH_OBJ);
     }
@@ -28,13 +28,7 @@ class modelProductos extends Model
         return $sentencia->fetch(PDO::FETCH_OBJ);
     }
 
-    function newBotin($modelo, $talle, $marca)
-    {
-        $query = $this->getDb()->prepare('INSERT INTO botines (modelo,marca,talle)VALUES (?,?,?)');
-        $query->execute([$modelo, $marca, $talle]);
-        $idinsertado = $this->getDB()->lastInsertId();
-        return $idinsertado;
-    }
+    
 
     function GetBotinesPorMarca($id_marca)
     {
@@ -43,38 +37,52 @@ class modelProductos extends Model
         $sentencia->execute([$id_marca]);
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
-    function modificarBotin($id)
+    function modificarBotin($id,$modelo,$talle,$marca)
     {
-        $sentencia = $this->getDB()->prepare("UPDATE botines SET stock=true WHERE id=?");
-        $sentencia->execute([$id]);
-        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+        $sentencia = $this->getDB()->prepare("UPDATE botines SET modelo=?,talle=?,marca=? WHERE id=?");
+        $sentencia->execute([$modelo,$talle,$marca,$id]);
+        return $sentencia->fetch(PDO::FETCH_OBJ);
         
     }
 
-    // funciones marcas
+    function uploadImagen($imagen) {
 
-    function GetMarcas()
-    {
-        $sentencia = $this->getDB()->prepare("SELECT * FROM marcas"); //
-        $sentencia->execute();
-        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+        $filepath = 'imagenes/' . uniqid() . '.jpg';
+        
+        return $filepath;
+
     }
 
-    function borrarMarca($id)
-    {
+    function newBotinConImagen($modelo,$talle,$marca,$nombreArchivo,$extensionArchivo,$temporario){
 
-        $sentencia = $this->getDB()->prepare("DELETE FROM marcas WHERE id_marca=?");
-        $sentencia->execute([$id]);
-        return $sentencia->fetch(PDO::PARAM_BOOL);
-    }
+        $nuevoNombre=md5(time().$nombreArchivo).'.'.$extensionArchivo;
 
-    function newMarca($marca, $paisdeorigen)
-    {
+        $filepath = 'imagenes/';
 
-        $query = $this->getDb()->prepare('INSERT INTO marcas (nombre,paisOrigen)VALUES (?,?)');
-        $query->execute([$marca, $paisdeorigen]);
+        $destino = $filepath.$nuevoNombre;
+
+        move_uploaded_file($temporario,$destino);
+        
+
+        $query = $this->getDb()->prepare('INSERT INTO botines (modelo,marca,talle,imagen)VALUES (?,?,?,?)');
+        $query->execute([$modelo, $marca, $talle,$destino]);
         return $query->fetch(PDO::FETCH_OBJ);
+
+    }
+    function newBotin($modelo, $marca, $talle ,$imagen=NULL)
+    {
+
+        $filepath = null;
+
+        if ($imagen)
+            $filepath= $this->uploadImagen($imagen);
+
+        $query = $this->getDb()->prepare('INSERT INTO botines (modelo,marca,talle,imagen)VALUES (?,?,?,?)');
+        $query->execute([$modelo, $marca, $talle,$filepath]);
+        return $query->fetch(PDO::FETCH_OBJ);
+       
     }
 
+    
     
 }

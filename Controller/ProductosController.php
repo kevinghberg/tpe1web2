@@ -1,31 +1,22 @@
 <?php
-
+include_once('./Model/modelMarcas.php');
 include_once('./Model/modelProductos.php');
 include_once('./View/productosView.php');
 
 class ProductosController extends Controller
 {
-    private $model;
+    private $modelProductos;
     private $view;
 
     public function __construct()
     {
 
-        $this->model = new  modelProductos();
-
+        $this->modelProductos = new  modelProductos();
+        $this->modelMarcas = new  modelMarcas();
         $this->view = new productosView();
     }
 
-    /** 
-     * Muestra la lista de Marcas.
-     **/
 
-    function showMarcas()
-    {
-        $marcas = $this->model->GetMarcas();
-        $logged = $this->CheckLoggedIn();
-        $this->view->RenderMarcas($marcas,$logged);
-    }
 
     /**
      * Muestra la lista de Botines.
@@ -33,7 +24,7 @@ class ProductosController extends Controller
 
     function showBotines()
     {
-        $botines = $this->model->GetBotines();
+        $botines = $this->modelProductos->GetBotines();
 
         $this->view->RenderBotines($botines);
     }
@@ -44,11 +35,11 @@ class ProductosController extends Controller
 
     function showVentas()
     {
-        $botines = $this->model->GetBotines();
-        $marcas = $this->model->GetMarcas();
+        $botines = $this->modelProductos->GetBotines();
+        $marcas = $this->modelMarcas->GetMarcas();
         $logged = $this->CheckLoggedIn();
 
-        $this->view->RenderVentas($botines, $marcas,$logged);
+        $this->view->RenderVentas($botines, $marcas, $logged);
     }
 
     /**
@@ -58,19 +49,8 @@ class ProductosController extends Controller
     function borrarBotin($id)
     {
         AuthHelper::checkLoggedIn();
-        $this->model->borrarBotin($id);
+        $this->modelProductos->borrarBotin($id);
         header("Location: " . BASE_URL . 'ventas');
-    }
-
-    /**
-     * Borra 1 marca de la tabla.
-     **/
-
-    function borrarMarca($id)
-    {
-        AuthHelper::checkLoggedIn();
-        $this->model->borrarMarca($id);
-        header("Location: " . BASE_URL . 'marcas');
     }
 
     /**
@@ -80,35 +60,29 @@ class ProductosController extends Controller
     function agregarBotin()
     {
         AuthHelper::checkLoggedIn();
+
         $modelo = $_POST['inputModelo'];
         $talle = $_POST['inputTalle'];
         $marca = $_POST['inputMarca'];
 
-        if (!empty($modelo) && !empty($talle) && !empty($marca)) {
-            $this->model->newBotin($modelo, $talle, $marca);
+        if(isset($_FILES['imagen']) ){
+
+            $nombreArchivo= $_FILES['imagen']['name'];
+
+            $temporario=$_FILES['imagen']['tmp_name'];
+            
+            
+            $extensionArchivo = pathinfo($nombreArchivo, PATHINFO_EXTENSION);   
+
+            $this->modelProductos->newBotinConImagen($modelo,$talle,$marca,$nombreArchivo,$extensionArchivo,$temporario);
+
         }
+     
+        $this->modelProductos->newBotin($modelo, $marca, $talle);
+
         header("Location: " . BASE_URL . 'ventas');
     }
-
-    /**
-     * Agrega 1 marca a la tabla.
-     **/
-
-
-    function agregarMarca()
-    {
-        AuthHelper::checkLoggedIn();
-
-        $marca = $_POST['inputMarca'];
-        $paisdeorigen = $_POST['inputPaisDeOrigen'];
-
-
-
-        if (!empty($marca) && !empty($paisdeorigen)) {
-            $this->model->newMarca($marca, $paisdeorigen);
-        }
-        header("Location: " . BASE_URL . 'marcas');
-    }
+    
 
     /**
      * Selecciona detalles de un botin($id)
@@ -117,10 +91,10 @@ class ProductosController extends Controller
     function GetDetalles($id)
     {
 
-        $botin = $this->model->GetBotin($id);
-        $marcas = $this->model->GetMarcas();
+        $botin = $this->modelProductos->GetBotin($id);
+        $marcas = $this->modelMarcas->GetMarcas();
         $logged = $this->CheckLoggedIn();
-        $this->view->RenderDetalle($botin, $marcas,$logged);
+        $this->view->RenderDetalle($botin, $marcas, $logged);
     }
 
 
@@ -133,37 +107,63 @@ class ProductosController extends Controller
         $id_marca = $_POST['marcaInput'];
 
 
-        $botin = $this->model->GetBotinesPorMarca($id_marca);
-        $marcas = $this->model->GetMarcas();
+        $botin = $this->modelProductos->GetBotinesPorMarca($id_marca);
+        $marcas = $this->modelMarcas->GetMarcas();
         $logged = $this->CheckLoggedIn();
 
-        $this->view->RenderVentas($botin, $marcas,$logged);
+        $this->view->RenderVentas($botin, $marcas, $logged);
     }
 
     /**
      * cambia el valor boolean de un botin (dice si esta vendido)
      **/
 
-    function modificarBotin($id)
+    function RenderModificar($id)
     {
 
         AuthHelper::checkLoggedIn();
 
-        $this->model->modificarBotin($id);
+
+        $botin=$this->modelProductos->GetBotin($id);
+
+        $marca=$this->modelMarcas->GetMarcas();
+
+        $this->view->RenderModificar($botin,$marca);
+
+
+       
+
+    }
+
+    function modificarBotin(){
+
+        AuthHelper::checkLoggedIn();
+
+        $modelo = $_POST['inputModificarModelo'];
+        $talle = $_POST['inputModificarTalle'];
+        $marca = $_POST['inputModificarMarca'];
+        $id = $_POST['inputId'];
+
+        if(!empty($modelo) && !empty($talle) && !empty($marca)){
+          
+            $this->modelProductos->modificarBotin($id,$modelo,$talle,$marca);
+
+        }
 
         header("Location: " . BASE_URL . 'ventas');
     }
 
-    private function CheckLoggedIn(){
-       
-        if(!isset($_SESSION["admin"])){
+
+    function CheckLoggedIn()
+    {
+
+        if (!isset($_SESSION["admin"])) {
             $logged = "false";
-        } elseif ($_SESSION["admin"] == 1){
+        } elseif ($_SESSION["admin"] == 1) {
             $logged = "admin";
         } else {
             $logged = "user";
         }
         return $logged;
     }
-    
 }

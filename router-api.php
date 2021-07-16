@@ -22,6 +22,9 @@ $router->addRoute('comentarios', 'POST', 'ApiComentariosController', 'InsertCome
 $router->addRoute("comentarios/:ID", "GET", "ApiComentariosController", "GetComentarios");
 $router->addRoute("comentarios/:ID", "DELETE", "ApiComentariosController", "deleteComentario");
 
+// Imagenes
+$router->addRoute("imagenes", "GET", "ApiImagenesController", "getImagenes");
+
 
 
 //Admin/User

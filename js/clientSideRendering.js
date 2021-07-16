@@ -54,7 +54,7 @@ function addComentario() {
         let dataC = {
             comentario: document.querySelector('input[name="input_textoComentario"]').value,
             valoracion: checkValoracion(),
-            id_botin: document.getElementById("botinardo").value
+            id_botin: document.getElementById("idbotin").value
         }
 
         fetch('api/comentarios', {
