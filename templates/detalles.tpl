@@ -1,18 +1,18 @@
 {include file="header.tpl"}
 
 
-    <div class="container d-flex justify-content-between">
+<div class="container d-flex justify-content-between">
 
     <div class="card card border-dark mb-3 " style="width: 16rem;">
 
 
-   
+
         <img src="{$botin->imagen}" class="card-img-top" alt="...">
-   
+
         <div class="card-body ">
             <p class="card-text">
 
-        
+
             <ul>
 
 
@@ -31,7 +31,7 @@
         </div>
     </div>
 
-
+                
 
 
 
@@ -50,19 +50,28 @@
         <div>
 
             <p class="clasificacion">
-            <input id="radio1" type="radio" name="radio1" value="5"><!--
-            --><label for="radio1">★</label><!--
-            --><input id="radio2" type="radio" name="radio1" value="4"><!--
-            --><label for="radio2">★</label><!--
-            --><input id="radio3" type="radio" name="radio1" value="3"><!--
-            --><label for="radio3">★</label><!--
-            --><input id="radio4" type="radio" name="radio1" value="2"><!--
-            --><label for="radio4">★</label><!--
-            --><input id="radio5" type="radio" name="radio1" value="1"><!--
+                <input id="radio1" type="radio" name="radio1" value="5">
+                <!--
+            --><label for="radio1">★</label>
+                <!--
+            --><input id="radio2" type="radio" name="radio1" value="4">
+                <!--
+            --><label for="radio2">★</label>
+                <!--
+            --><input id="radio3" type="radio" name="radio1" value="3">
+                <!--
+            --><label for="radio3">★</label>
+                <!--
+            --><input id="radio4" type="radio" name="radio1" value="2">
+                <!--
+            --><label for="radio4">★</label>
+                <!--
+            --><input id="radio5" type="radio" name="radio1" value="1">
+                <!--
             --><label for="radio5">★</label>
-          </p>
+            </p>
 
-    
+
 
         </div>
 
@@ -75,11 +84,13 @@
 
 
     <br><br>
-    
+
 
     <div>
-    {include file="vue/coment.vue"}
-</div>
+        {include file="vue/coment.vue"}
+    </div>
+
+
 
 
 
